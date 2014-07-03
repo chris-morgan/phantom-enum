@@ -1,0 +1,14 @@
+env:
+  global:
+    - secure: m1xgRK6FldIxfvbX5fCgtNe1k567IWguyDUO0RMoXimV5V3IU6UK/dKev8eWJzPuauwXhCsLuGAxV5cesj59wZ9/0pOLQs2/C9hPSlvGxZqF3FoxyJn/sdoL1NrFsJloEfyf21QYvh+wK7W7qL5ITVY4HEWu4e//gOR+0tO0y4g=before_install:
+  - yes | sudo add-apt-repository ppa:hansjorg/rust
+  - sudo apt-get update
+install:
+  - sudo apt-get install rust-nightly
+script:
+  - mkdir target
+  - rustc --out-dir=target --crate-type rlib src/phantom_enum.rs
+  - rustdoc src/phantom_enum.rs
+  - rustdoc --test src/phantom_enum.rs -L
+after_script:
+  - curl http://www.rust-ci.org/artifacts/put?t=$RUSTCI_TOKEN | sh
