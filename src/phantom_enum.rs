@@ -78,18 +78,13 @@ macro_rules! phantom_enum {
     ) => {
         #[$enum_attr]
         mod $name {
-            /// Kinda the opposite of NIH.
-            /// Designed to prevent extension of this phantom type enum.
-            trait OnlyImplementedHere { }
-
             /// Implemented exclusively by members of this phantom type enum.
             /// This is for use as a generic bound.
-            pub trait Impl: OnlyImplementedHere { }
+            pub trait Impl { }
 
             $(
                 #[$variant_attr]
                 pub enum $variant { }
-                impl OnlyImplementedHere for $variant { }
                 impl Impl for $variant { }
             )*
         }
