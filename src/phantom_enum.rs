@@ -77,6 +77,7 @@ macro_rules! phantom_enum {
         }
     ) => {
         #[$enum_attr]
+        #[allow(non_snake_case)]
         mod $name {
             /// Implemented exclusively by members of this phantom type enum.
             /// This is for use as a generic bound.
