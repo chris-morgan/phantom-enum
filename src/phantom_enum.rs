@@ -85,6 +85,7 @@ macro_rules! phantom_enum {
 
             $(
                 #[$variant_attr]
+                #[derive(Copy)]
                 pub enum $variant { }
                 impl Impl for $variant { }
             )*
