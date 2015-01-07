@@ -1,4 +1,4 @@
-phantom-enum 0.9.1
+phantom-enum 0.9.2
 ==================
 
 [![Build Status](https://travis-ci.org/chris-morgan/phantom-enum.svg?branch=master)](https://travis-ci.org/chris-morgan/phantom-enum)
@@ -69,12 +69,12 @@ Similarly, once you have drunk that potion, you can’t drink it again.
 Usage
 -----
 
-Cargo all the way.
+Cargo all the way. http://crates.io/crates/phantom-enum
 
 Author
 ------
 
-[Chris Morgan](http://chrismorgan.info/) ([chris-morgan](https://github.com/chris-morgan)) is the primary author and maintainer of phantom-enum.
+[Chris Morgan](http://chrismorgan.info/) ([chris-morgan](https://github.com/chris-morgan)) is the primary author and maintainer of this library.
 
 License
 -------
