@@ -13,9 +13,7 @@ and trait and the variants are (uninstantiable) types.
 This is very good for the static representation of state machines in which
 *nothing* can go wrong.
 
-    #![feature(phase)]
-
-    #[phase(plugin)]
+    #[macro_use] #[no_link]
     extern crate phantom_enum;
 
     phantom_enum! {

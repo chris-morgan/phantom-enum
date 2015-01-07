@@ -1,7 +1,6 @@
 //! A simple macro library for creating phantom enums. Just simple sugar.
 //!
 //! See the `phantom_enum!` macro for all the details.
-#![feature(macro_rules)]
 
 /// Create a phantom type enum.
 ///
@@ -11,9 +10,7 @@
 /// This is very good for the static representation of state machines in which
 /// *nothing* can go wrong.
 ///
-///     #![feature(phase)]
-///
-///     #[phase(plugin)]
+///     #[macro_use] #[no_link]
 ///     extern crate phantom_enum;
 ///
 ///     phantom_enum! {
