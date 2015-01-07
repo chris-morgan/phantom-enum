@@ -75,6 +75,31 @@ macro_rules! phantom_enum {
     ) => {
         #[$enum_attr]
         #[allow(non_snake_case)]
+        pub mod $name {
+            /// Implemented exclusively by members of this phantom type enum.
+            /// This is for use as a generic bound.
+            pub trait Impl { }
+
+            $(
+                #[$variant_attr]
+                #[derive(Copy)]
+                pub enum $variant { }
+                impl Impl for $variant { }
+            )*
+        }
+    };
+
+    (
+        #[$enum_attr:meta]
+        enum $name:ident {
+            $(
+                #[$variant_attr:meta]
+                $variant:ident
+             ),*
+        }
+    ) => {
+        #[$enum_attr]
+        #[allow(non_snake_case)]
         mod $name {
             /// Implemented exclusively by members of this phantom type enum.
             /// This is for use as a generic bound.
