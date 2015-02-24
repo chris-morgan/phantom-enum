@@ -1,4 +1,4 @@
-phantom-enum 0.9.2
+phantom-enum 0.9.3
 ==================
 
 [![Build Status](https://travis-ci.org/chris-morgan/phantom-enum.svg?branch=master)](https://travis-ci.org/chris-morgan/phantom-enum)

@@ -25,6 +25,7 @@
 ///
 ///     struct Person<T> {
 ///         name: &'static str,
+///         phantom: std::marker::PhantomData<T>,
 ///     }
 ///
 ///     // Note how this restricts the methods to only meaningful types.
@@ -33,6 +34,7 @@
 ///         fn new(name: &'static str) -> Person<T> {
 ///             Person {
 ///                 name: name,
+///                 phantom: std::marker::PhantomData,
 ///             }
 ///         }
 ///     }
@@ -42,6 +44,7 @@
 ///             println!("Shrinking! Oh look, there’s a box down here!");
 ///             Person {
 ///                 name: self.name,
+///                 phantom: std::marker::PhantomData,
 ///             }
 ///         }
 ///     }
@@ -78,7 +81,7 @@ macro_rules! phantom_enum {
         pub mod $name {
             /// Implemented exclusively by members of this phantom type enum.
             /// This is for use as a generic bound.
-            pub trait Impl { }
+            pub trait Impl: ::std::marker::PhantomFn<Self> { }
 
             $(
                 #[$variant_attr]
@@ -103,7 +106,7 @@ macro_rules! phantom_enum {
         mod $name {
             /// Implemented exclusively by members of this phantom type enum.
             /// This is for use as a generic bound.
-            pub trait Impl { }
+            pub trait Impl: ::std::marker::PhantomFn<Self> { }
 
             $(
                 #[$variant_attr]
