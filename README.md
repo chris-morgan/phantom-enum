@@ -1,4 +1,4 @@
-phantom-enum 0.9.3
+phantom-enum 0.9.4
 ==================
 
 [![Build Status](https://travis-ci.org/chris-morgan/phantom-enum.svg?branch=master)](https://travis-ci.org/chris-morgan/phantom-enum)
@@ -17,11 +17,11 @@ This is very good for the static representation of state machines in which
     extern crate phantom_enum;
 
     phantom_enum! {
-        #[doc = "Put things here, of course"]
+        /// Put things here, of course
         pub enum TableItem {
-            #[doc = "A bottle with a paper label reading “DRINK ME”."]
+            /// A bottle with a paper label reading “DRINK ME”.
             Potion,
-            #[doc = "A cake with the words “EAT ME” marked in currants."]
+            /// A cake with the words “EAT ME” marked in currants.
             Cake
         }
     }

@@ -14,11 +14,11 @@
 ///     extern crate phantom_enum;
 ///
 ///     phantom_enum! {
-///         #[doc = "Put things here, of course"]
+///         /// Put things here, of course
 ///         pub enum TableItem {
-///             #[doc = "A bottle with a paper label reading “DRINK ME”."]
+///             /// A bottle with a paper label reading “DRINK ME”.
 ///             Potion,
-///             #[doc = "A cake with the words “EAT ME” marked in currants."]
+///             /// A cake with the words “EAT ME” marked in currants.
 ///             Cake
 ///         }
 ///     }
@@ -68,15 +68,15 @@
 #[macro_export]
 macro_rules! phantom_enum {
     (
-        #[$enum_attr:meta]
+        $(#[$enum_attr:meta])*
         pub enum $name:ident {
             $(
-                #[$variant_attr:meta]
+                $(#[$variant_attr:meta])+
                 $variant:ident
              ),*
         }
     ) => {
-        #[$enum_attr]
+        $(#[$enum_attr])*
         #[allow(non_snake_case)]
         pub mod $name {
             /// Implemented exclusively by members of this phantom type enum.
@@ -84,8 +84,8 @@ macro_rules! phantom_enum {
             pub trait Impl: ::std::marker::PhantomFn<Self> { }
 
             $(
-                #[$variant_attr]
-                #[derive(Copy)]
+                $(#[$variant_attr])+
+                #[derive(Copy, Clone)]
                 pub enum $variant { }
                 impl Impl for $variant { }
             )*
@@ -93,15 +93,15 @@ macro_rules! phantom_enum {
     };
 
     (
-        #[$enum_attr:meta]
+        $(#[$enum_attr:meta])*
         enum $name:ident {
             $(
-                #[$variant_attr:meta]
+                $(#[$variant_attr:meta])+
                 $variant:ident
              ),*
         }
     ) => {
-        #[$enum_attr]
+        $(#[$enum_attr])*
         #[allow(non_snake_case)]
         mod $name {
             /// Implemented exclusively by members of this phantom type enum.
@@ -109,8 +109,8 @@ macro_rules! phantom_enum {
             pub trait Impl: ::std::marker::PhantomFn<Self> { }
 
             $(
-                #[$variant_attr]
-                #[derive(Copy)]
+                $(#[$variant_attr])+
+                #[derive(Copy, Clone)]
                 pub enum $variant { }
                 impl Impl for $variant { }
             )*
