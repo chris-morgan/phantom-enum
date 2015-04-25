@@ -81,7 +81,7 @@ macro_rules! phantom_enum {
         pub mod $name {
             /// Implemented exclusively by members of this phantom type enum.
             /// This is for use as a generic bound.
-            pub trait Impl: ::std::marker::PhantomFn<Self> { }
+            pub trait Impl { }
 
             $(
                 $(#[$variant_attr])+
@@ -106,7 +106,7 @@ macro_rules! phantom_enum {
         mod $name {
             /// Implemented exclusively by members of this phantom type enum.
             /// This is for use as a generic bound.
-            pub trait Impl: ::std::marker::PhantomFn<Self> { }
+            pub trait Impl { }
 
             $(
                 $(#[$variant_attr])+
