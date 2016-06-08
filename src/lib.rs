@@ -10,57 +10,58 @@
 /// This is very good for the static representation of state machines in which
 /// *nothing* can go wrong.
 ///
-///     #[macro_use] #[no_link]
-///     extern crate phantom_enum;
+/// ```rust
+/// #[macro_use] #[no_link]
+/// extern crate phantom_enum;
 ///
-///     phantom_enum! {
-///         /// Put things here, of course
-///         pub enum TableItem {
-///             /// A bottle with a paper label reading “DRINK ME”.
-///             Potion,
-///             /// A cake with the words “EAT ME” marked in currants.
-///             Cake
+/// phantom_enum! {
+///     /// Put things here, of course
+///     pub enum TableItem {
+///         /// A bottle with a paper label reading “DRINK ME”.
+///         Potion,
+///         /// A cake with the words “EAT ME” marked in currants.
+///         Cake,
+///     }
+/// }
+///
+/// // Note how this restricts the methods to only meaningful types.
+/// struct Person<T: TableItem::Impl> {
+///     name: &'static str,
+///     phantom: std::marker::PhantomData<T>,
+/// }
+///
+/// impl<T: TableItem::Impl> Person<T> {
+///     fn new(name: &'static str) -> Person<T> {
+///         Person {
+///             name: name,
+///             phantom: std::marker::PhantomData,
 ///         }
 ///     }
+/// }
 ///
-///     struct Person<T> {
-///         name: &'static str,
-///         phantom: std::marker::PhantomData<T>,
-///     }
-///
-///     // Note how this restricts the methods to only meaningful types.
-///     // (I look forward to generic bounds in struct definitions!)
-///     impl<T: TableItem::Impl> Person<T> {
-///         fn new(name: &'static str) -> Person<T> {
-///             Person {
-///                 name: name,
-///                 phantom: std::marker::PhantomData,
-///             }
+/// impl Person<TableItem::Potion> {
+///     fn drink_it(self) -> Person<TableItem::Cake> {
+///         println!("Shrinking! Oh look, there’s a box down here!");
+///         Person {
+///             name: self.name,
+///             phantom: std::marker::PhantomData,
 ///         }
 ///     }
+/// }
 ///
-///     impl Person<TableItem::Potion> {
-///         fn drink_it(self) -> Person<TableItem::Cake> {
-///             println!("Shrinking! Oh look, there’s a box down here!");
-///             Person {
-///                 name: self.name,
-///                 phantom: std::marker::PhantomData,
-///             }
-///         }
+/// impl Person<TableItem::Cake> {
+///     fn eat_it(self) -> () {
+///         println!("Growing! OK, that’s enough of the story.");
+///         // Who can remember what comes next, anyway?
 ///     }
+/// }
 ///
-///     impl Person<TableItem::Cake> {
-///         fn eat_it(self) -> () {
-///             println!("Growing! OK, that’s enough of the story.");
-///             // Who can remember what comes next, anyway?
-///         }
-///     }
-///
-///     fn main() {
-///         let person = Person::new("Alice");
-///         let person = person.drink_it();
-///         person.eat_it();
-///     }
+/// fn main() {
+///     let person = Person::new("Alice");
+///     let person = person.drink_it();
+///     person.eat_it();
+/// }
+/// ```
 ///
 /// As you will observe with this example, if you have a `Person<Potion>`, you
 /// simply cannot call `.eat_it()`; for that, you must have a `Person<Cake>`.
@@ -73,7 +74,7 @@ macro_rules! phantom_enum {
             $(
                 $(#[$variant_attr:meta])+
                 $variant:ident
-             ),*
+             ),*$(,)*
         }
     ) => {
         $(#[$enum_attr])*
@@ -98,7 +99,7 @@ macro_rules! phantom_enum {
             $(
                 $(#[$variant_attr:meta])+
                 $variant:ident
-             ),*
+             ),*$(,)*
         }
     ) => {
         $(#[$enum_attr])*

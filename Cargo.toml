@@ -1,14 +1,8 @@
 [package]
 name = "phantom-enum"
-version = "0.9.5"
+version = "1.0.0"
 authors = ["Chris Morgan <me@chrismorgan.info>"]
 description = "A simple macro library for creating phantom enums."
-#documentation = 
-#homepage = 
 repository = "https://github.com/chris-morgan/phantom-enum"
-readme = "README.md"
 keywords = ["macro"]
 license = "MIT/Apache-2.0"
-
-[lib]
-name = "phantom_enum"
